@@ -301,6 +301,7 @@ def main(args):
     rng = jax.random.PRNGKey(30)
     train_jit = jax.jit(make_train(config))
     out = train_jit(rng)
+    writer.close()
 
 
 if __name__ == "__main__":
