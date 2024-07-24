@@ -12,7 +12,7 @@ from wrappers import LogWrapper, FlattenObservationWrapper
 import wandb
 import argparse
 
-wandb.init(project="RL/ppo_cartpole_v1", entity="jmleeluck")
+wandb.init(project="ppo_cartpole_v1", entity="jmleeluck")
 
 class ActorCritic(nn.Module):
     action_dim: Sequence[int]
