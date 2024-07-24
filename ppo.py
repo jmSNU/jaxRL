@@ -61,7 +61,7 @@ class Transition(NamedTuple):
     info: jnp.ndarray
 
 
-def make_train(config):
+def make_train(config,writer):
     config["NUM_UPDATES"] = (
         config["TOTAL_TIMESTEPS"] // config["NUM_STEPS"] // config["NUM_ENVS"]
     )
@@ -295,11 +295,10 @@ def main(args):
         "ANNEAL_LR": args.anneal_lr,
         "DEBUG": args.debug,
     }
-    global writer
     writer = SummaryWriter(logdir=args.logdir)
     
     rng = jax.random.PRNGKey(30)
-    train_jit = jax.jit(make_train(config))
+    train_jit = jax.jit(make_train(config,writer))
     out = train_jit(rng)
     writer.close()
 
