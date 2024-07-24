@@ -12,7 +12,6 @@ from wrappers import LogWrapper, FlattenObservationWrapper
 import wandb
 import argparse
 
-wandb.init(project="ppo_cartpole_v1", entity="jmleeluck")
 
 class ActorCritic(nn.Module):
     action_dim: Sequence[int]
@@ -299,6 +298,8 @@ def main(args):
         "ANNEAL_LR": args.anneal_lr,
         "DEBUG": args.debug,
     }
+    wandb.init(project=args.env_name, entity="jmleeluck")
+
     
     rng = jax.random.PRNGKey(30)
     train_jit = jax.jit(make_train(config))
