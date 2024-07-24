@@ -9,9 +9,10 @@ from flax.training.train_state import TrainState
 import distrax
 import gymnax
 from wrappers import LogWrapper, FlattenObservationWrapper
-from tensorboardX import SummaryWriter
+import wandb
 import argparse
 
+wandb.init(project="ppo_cartpole_v1", entity="jmleeluck")
 
 class ActorCritic(nn.Module):
     action_dim: Sequence[int]
@@ -61,7 +62,7 @@ class Transition(NamedTuple):
     info: jnp.ndarray
 
 
-def make_train(config,writer):
+def make_train(config):
     config["NUM_UPDATES"] = (
         config["TOTAL_TIMESTEPS"] // config["NUM_STEPS"] // config["NUM_ENVS"]
     )
@@ -260,7 +261,10 @@ def make_train(config,writer):
                     timesteps = info["timestep"][info["returned_episode"]] * config["NUM_ENVS"]
                     for t in range(len(timesteps)):
                         print(f"global step={timesteps[t]}, episodic return={return_values[t]}")
-                        writer.add_scalar('Episodic Return', return_values[t], timesteps[t])
+                        wandb.log({
+                            "timestep": timesteps[t],
+                            "episodic_return": return_values[t]
+                        })
                 jax.debug.callback(callback, metric)
 
             runner_state = (train_state, env_state, last_obs, rng)
@@ -295,12 +299,10 @@ def main(args):
         "ANNEAL_LR": args.anneal_lr,
         "DEBUG": args.debug,
     }
-    writer = SummaryWriter(logdir=args.logdir)
     
     rng = jax.random.PRNGKey(30)
     train_jit = jax.jit(make_train(config,writer))
     out = train_jit(rng)
-    writer.close()
 
 
 if __name__ == "__main__":
