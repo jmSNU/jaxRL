@@ -1,0 +1,54 @@
+/home/jm/.local/lib/python3.10/site-packages/jax/_src/ops/scatter.py:96: FutureWarning: scatter inputs have incompatible types: cannot safely cast value from dtype=int32 to dtype=bool with jax_numpy_dtype_promotion='standard'. In future JAX releases this will result in an error.
+  warnings.warn(
+jax.errors.SimplifiedTraceback: For simplicity, JAX has removed its internal frames from the traceback of the following exception. Set JAX_TRACEBACK_FILTERING=off to include these.
+The above exception was the direct cause of the following exception:
+Traceback (most recent call last):
+  File "/home/jm/workspace/jaxRL/ppo.py", line 330, in <module>
+    main(args)
+  File "/home/jm/workspace/jaxRL/ppo.py", line 306, in main
+    out = train_jit(rng)
+  File "/home/jm/workspace/jaxRL/ppo.py", line 274, in train
+    runner_state, metric = jax.lax.scan(
+  File "/home/jm/workspace/jaxRL/ppo.py", line 136, in _update_step
+    runner_state, traj_batch = jax.lax.scan(
+  File "/home/jm/workspace/jaxRL/ppo.py", line 127, in _env_step
+    obsv, env_state, reward, done, info = jax.vmap(
+  File "/home/jm/workspace/jaxRL/wrappers.py", line 95, in step
+    obs, env_state, reward, done, info = self._env.step(
+  File "/home/jm/workspace/jaxRL/wrappers.py", line 58, in step
+    obs, state, reward, done, info = self._env.step(key, state, action, params)
+  File "/home/jm/.local/lib/python3.10/site-packages/gymnax/environments/environment.py", line 45, in step
+    obs_st, state_st, reward, done, info = self.step_env(key, state, action, params)
+  File "/home/jm/.local/lib/python3.10/site-packages/gymnax/environments/minatar/asterix.py", line 108, in step_env
+    state, reward, done = step_entities(state)
+  File "/home/jm/.local/lib/python3.10/site-packages/gymnax/environments/minatar/asterix.py", line 335, in step_entities
+    bool(done > 0),
+jax.errors.TracerBoolConversionError: Attempted boolean conversion of traced array with shape bool[]..
+The error occurred while tracing the function step at /home/jm/.local/lib/python3.10/site-packages/gymnax/environments/environment.py:32 for jit. This concrete value was not available in Python because it depends on the values of the arguments self, key.player_x, key.player_y, key.spawn_timer, key.move_timer, key.entities, and state.
+See https://jax.readthedocs.io/en/latest/errors.html#jax.errors.TracerBoolConversionError
+jax.errors.SimplifiedTraceback: For simplicity, JAX has removed its internal frames from the traceback of the following exception. Set JAX_TRACEBACK_FILTERING=off to include these.
+The above exception was the direct cause of the following exception:
+Traceback (most recent call last):
+  File "/home/jm/workspace/jaxRL/ppo.py", line 330, in <module>
+    main(args)
+  File "/home/jm/workspace/jaxRL/ppo.py", line 306, in main
+    out = train_jit(rng)
+  File "/home/jm/workspace/jaxRL/ppo.py", line 274, in train
+    runner_state, metric = jax.lax.scan(
+  File "/home/jm/workspace/jaxRL/ppo.py", line 136, in _update_step
+    runner_state, traj_batch = jax.lax.scan(
+  File "/home/jm/workspace/jaxRL/ppo.py", line 127, in _env_step
+    obsv, env_state, reward, done, info = jax.vmap(
+  File "/home/jm/workspace/jaxRL/wrappers.py", line 95, in step
+    obs, env_state, reward, done, info = self._env.step(
+  File "/home/jm/workspace/jaxRL/wrappers.py", line 58, in step
+    obs, state, reward, done, info = self._env.step(key, state, action, params)
+  File "/home/jm/.local/lib/python3.10/site-packages/gymnax/environments/environment.py", line 45, in step
+    obs_st, state_st, reward, done, info = self.step_env(key, state, action, params)
+  File "/home/jm/.local/lib/python3.10/site-packages/gymnax/environments/minatar/asterix.py", line 108, in step_env
+    state, reward, done = step_entities(state)
+  File "/home/jm/.local/lib/python3.10/site-packages/gymnax/environments/minatar/asterix.py", line 335, in step_entities
+    bool(done > 0),
+jax.errors.TracerBoolConversionError: Attempted boolean conversion of traced array with shape bool[]..
+The error occurred while tracing the function step at /home/jm/.local/lib/python3.10/site-packages/gymnax/environments/environment.py:32 for jit. This concrete value was not available in Python because it depends on the values of the arguments self, key.player_x, key.player_y, key.spawn_timer, key.move_timer, key.entities, and state.
+See https://jax.readthedocs.io/en/latest/errors.html#jax.errors.TracerBoolConversionError

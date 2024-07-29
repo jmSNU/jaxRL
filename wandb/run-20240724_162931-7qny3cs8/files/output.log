@@ -1,0 +1,12 @@
+Traceback (most recent call last):
+  File "/home/jm/workspace/jaxRL/ppo.py", line 329, in <module>
+    main(args)
+  File "/home/jm/workspace/jaxRL/ppo.py", line 304, in main
+    train_jit = jax.jit(make_train(config,writer))
+NameError: name 'writer' is not defined
+Traceback (most recent call last):
+  File "/home/jm/workspace/jaxRL/ppo.py", line 329, in <module>
+    main(args)
+  File "/home/jm/workspace/jaxRL/ppo.py", line 304, in main
+    train_jit = jax.jit(make_train(config,writer))
+NameError: name 'writer' is not defined. Did you mean: 'iter'?

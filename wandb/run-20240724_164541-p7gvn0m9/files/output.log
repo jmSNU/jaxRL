@@ -1,0 +1,20 @@
+Traceback (most recent call last):
+  File "/home/jm/workspace/jaxRL/ppo.py", line 330, in <module>
+    main(args)
+  File "/home/jm/workspace/jaxRL/ppo.py", line 305, in main
+    train_jit = jax.jit(make_train(config))
+  File "/home/jm/workspace/jaxRL/ppo.py", line 71, in make_train
+    env, env_params = gymnax.make(config["ENV_NAME"])
+  File "/home/jm/.local/lib/python3.10/site-packages/gymnax/registration.py", line 45, in make
+    raise ValueError(f"{env_id} is not in registered gymnax environments.")
+ValueError: InvertedPendulum-v1 is not in registered gymnax environments.
+Traceback (most recent call last):
+  File "/home/jm/workspace/jaxRL/ppo.py", line 330, in <module>
+    main(args)
+  File "/home/jm/workspace/jaxRL/ppo.py", line 305, in main
+    train_jit = jax.jit(make_train(config))
+  File "/home/jm/workspace/jaxRL/ppo.py", line 71, in make_train
+    env, env_params = gymnax.make(config["ENV_NAME"])
+  File "/home/jm/.local/lib/python3.10/site-packages/gymnax/registration.py", line 45, in make
+    raise ValueError(f"{env_id} is not in registered gymnax environments.")
+ValueError: InvertedPendulum-v1 is not in registered gymnax environments.
